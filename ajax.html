@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Ajax</title>
+</head>
+<body>
+<form action="#">
+<div>
+<input type="text" name="name" id="name">
+</div>
+<button type="submit">Valider</button>
+</form>
+<div id="reponse"></div>
+
+
+<script>
+//Selectionne le formulaire
+const myForm = document.querySelector('form');
+
+//On affecte une écoute d'événement submit
+myForm.addEventListener('submit', function(e){
+
+//Interrompre l'evenement par défaut du navigateur
+e.preventDefault();
+
+// on selectionne la case formulaire
+nameInpt= document.querySelector('#name')
+
+// on exécute une promessse ajax
+fetch(`multiplications.php?name=${nameInpt.value}`)
+.then( function(theReponse){
+return theReponse.text();
+
+})
+.then( function(datas){
+const myDiv = document.querySelector('#reponse');
+// on met la reponse dans le paragraphe
+myDiv.innerHTML = datas;
+
+});
+})
+
+</script>
+
+
+</body>
+
+</html>
